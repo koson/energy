@@ -10,6 +10,7 @@
 </script>
 
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat&amp;lang=en" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>theme/style.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>theme/buttons.css" />
