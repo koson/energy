@@ -44,7 +44,13 @@ switch ($q)
             $content = view("view/home.php",array());
         }
         break;
-
+        
+    case "intro":
+        if (!$session) break;
+        $format = "html";
+        $content = view("view/energy.php",array('session'=>$session));
+        break;
+        
     case "app/myelectric":
         if (!$session) break;
         $format = "html";

@@ -42,6 +42,9 @@
       <a href="<?php echo $path; ?>autoconfig">Device config</a>
       <!--<a href="<?php echo $path; ?>#">Email Reports</a>-->
       <a class="logout" href="<?php echo $path; ?>#">Logout</a>
+      <br><br>
+      <b>Energy</b><br>
+      <a href="<?php echo $path; ?>intro">Introduction</a>
     </div>
   </div>
 
