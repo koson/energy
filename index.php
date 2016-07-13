@@ -156,6 +156,11 @@ switch ($q)
         break;
 }
 
+if ($content=="Sorry page not found" && !$session) {
+    $format = "html";
+    $content = view("view/login.php",array());
+}
+
 switch ($format) 
 {
     case "html":

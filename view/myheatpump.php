@@ -178,11 +178,26 @@ var heatpump_heat_start = feed.getvalue(feeds["heatpump_heat_kwh"].id, start_tim
 
 resize();
 
-var timeWindow = (3600000*24.0*30);
 var end = (new Date()).getTime();
-var start = end - timeWindow;
-bargraph_load(start,end);
-bargraph_draw();
+
+// If this is a new dashboard there will be less than a days data 
+// show power graph directly in this case
+if (((end*0.001)-start_time)<86400*1) {
+  var timeWindow = (end - start_time*1000);
+  var start = end - timeWindow;
+  view.start = start;
+  view.end = end;
+  viewmode = "powergraph";
+  $(".bargraph-navigation").hide();
+  powergraph_load();
+  $(".powergraph-navigation").show();
+  powergraph_draw();
+} else {
+  var timeWindow = (3600000*24.0*30);
+  var start = end - timeWindow;
+  bargraph_load(start,end);
+  bargraph_draw();
+}
 
 // -------------------------------------------------------------------------------
 // LOOP
@@ -202,7 +217,8 @@ function updater()
         // Update all-time values
         var total_elec = feeds["heatpump_elec_kwh"].value - heatpump_elec_start;
         var total_heat = feeds["heatpump_heat_kwh"].value - heatpump_heat_start;
-        var total_cop = total_heat / total_elec;
+        var total_cop = 0;
+        if (total_elec>0) total_cop = total_heat / total_elec;
         
         $("#total_elec").html(Math.round(total_elec));
         $("#total_heat").html(Math.round(total_heat));
@@ -216,7 +232,8 @@ function updater()
             
             var elec = feeds["heatpump_elec_kwh"].value - feed.getvalue(feeds["heatpump_elec_kwh"].id, min30*1000)[1];
             var heat = feeds["heatpump_heat_kwh"].value - feed.getvalue(feeds["heatpump_heat_kwh"].id, min30*1000)[1];
-            var COP = heat / elec;
+            var COP = 0;
+            if (elec>0) COP = heat / elec;
             $("#COP_30m").html(COP.toFixed(2));
         }
         progtime += 5;
@@ -373,7 +390,8 @@ function powergraph_load()
     feedstats["heatpump_flowT"] = stats(data["heatpump_flowT"]);
     feedstats["heatpump_returnT"] = stats(data["heatpump_returnT"]);
     
-    $("#window-cop").html((feedstats["heatpump_heat"].mean / feedstats["heatpump_elec"].mean).toFixed(1));
+    if (feedstats["heatpump_elec"].mean>0) 
+        $("#window-cop").html((feedstats["heatpump_heat"].mean / feedstats["heatpump_elec"].mean).toFixed(1));
     
     var out = "";
     for (var z in feedstats) {

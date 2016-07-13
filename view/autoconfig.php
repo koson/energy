@@ -102,6 +102,9 @@ function load()
             }
         }    
     });
+    
+    // auto refresh menu
+    feeds = feed.listbyname();
 }
 
 $("#devices").on("change","input[type=radio]",function(){
