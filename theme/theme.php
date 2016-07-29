@@ -57,7 +57,7 @@
 
 </body>
 
-<script type="text/javascript" src="<?php echo $path; ?>view/appmenu2.js"></script>
+<script type="text/javascript" src="<?php echo $path; ?>view/appmenu3.js"></script>
 
 <script>
 $(".logout").click(function() {
