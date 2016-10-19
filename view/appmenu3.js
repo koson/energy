@@ -6,7 +6,11 @@ var appmenu = {
   "myheatpump": {
     "name": "My Heatpump",
     "feeds":["heatpump_elec_kwh","heatpump_heat","heatpump_heat_kwh","heatpump_flowT","heatpump_returnT"]
-  }
+  },
+  "myopenevse": {
+    "name": "My OpenEVSE",
+    "feeds":["OpenEVSE_POWER","OpenEVSE_KWH"]
+  },
 }
 
 if (window.feeds==undefined) feeds = feed.listbyname();

@@ -68,6 +68,12 @@ switch ($q)
         $format = "html";
         $content = view("view/myheatpump2.php",array('session'=>$session));
         break;
+        
+    case "app/myopenevse":
+        if (!$session) break;
+        $format = "html";
+        $content = view("view/myopenevse.php",array('session'=>$session));
+        break;
              
     case "status":
         if (!$session) break;

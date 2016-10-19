@@ -2,50 +2,62 @@
     global $path, $session;
     $apikey = $session['apikey_read'];
 ?>
-  
+   
 <script type="text/javascript" src="<?php echo $path; ?>lib/configbasic.js"></script> 
 <script type="text/javascript" src="<?php echo $path; ?>lib/flot/jquery.flot.min.js"></script> 
 <script type="text/javascript" src="<?php echo $path; ?>lib/flot/jquery.flot.time.min.js"></script> 
 <script type="text/javascript" src="<?php echo $path; ?>lib/flot/jquery.flot.selection.min.js"></script> 
 <script type="text/javascript" src="<?php echo $path; ?>lib/flot/date.format.js"></script> 
 <script type="text/javascript" src="<?php echo $path; ?>lib/vis.helper.js"></script>
+<script type="text/javascript" src="<?php echo $path; ?>lib/pie.js"></script>
+
+<style>
+.electric-title {
+    font-weight:bold;
+    font-size:22px;
+    color:#44b3e2;
+}
+
+.power-value {
+    font-weight:bold; 
+    font-size:52px; 
+    color:#44b3e2;
+}
+</style>
 
 <div id="config-error"></div>
 
 <div id="dashboard">
-  <div style="background-color:#ccc; padding:10px;">
-    <b>MY HEATPUMP</b>
+
+  <div style="background-color:rgba(68,179,226,1.0)">
+
+    <div class="bluenav cost">Cost</div>
+    <div class="bluenav energy">Energy</div>
+    
+    <div style="padding:10px;">
+      <b>MY OPENEVSE</b>
+    </div>
+
   </div>
 
-  <div style="background-color:#fff; color:#333">
-    <br>
-    <table style="width:100%; color:#333">
+  <div style="background-color:#fff; color:#333; padding:10px;">
+    <table style="width:100%">
       <tr>
-        <td style="width:25%; text-align:center" valign="top">
-          <b>COP 30 mins</b>
-          <h1><span id="COP_30m"></span></h1>
+        <td style="width:33%">
+            <div class="electric-title">POWER NOW</div>
+            <div class="power-value"><span id="power_now">0</span>W</div>
         </td>
-        
-        <td style="width:25%; text-align:center" valign="top">
-          <b>Heatpump Power</b>
-          <h1><span id="heatpump_elec"></span>W</h1>
-        </td>
-        
-        <td style="width:25%; text-align:center" valign="top">
-          <b>Heat Output</b>
-          <h1><span id="heatpump_heat"></span>W</h1>
-        </td>
-
-        <td style="width:25%; text-align:center" valign="top">
-          <b>Flow Temperature</b>
-          <h1><span id="heatpump_flowT"></span>&deg;C</h1>
+        <td style="text-align:center; width:33%"></td>
+        <td style="text-align:right; width:33%">
+            <div class="electric-title">USE TODAY</div>
+            <div class="power-value"><span id="kwh_today">0</span> kWh</div>
         </td>
       </tr>
     </table>
   </div>
   <br>
 
-  <div style="background-color:#ccc;">
+  <div style="background-color:rgba(68,179,226,1.0);">
   
     <div class="bargraph-navigation">
       <div class="bluenav bargraph-other">OTHER</div>
@@ -71,21 +83,18 @@
        
   </div>
   
-  <div style="background-color:#fff; padding:10px;">
+  <div style="background-color:rgba(68,179,226,0.1); padding:10px;">
     <div id="placeholder_bound" style="width:100%; height:500px;">
       <div id="placeholder" style="height:500px"></div>
     </div>
   </div>
         
-  <div style="background-color:#eee; color:#333">
+  <div style="background-color:#eee; color:#333;">
     <div id='advanced-toggle' class='bluenav' >SHOW DETAIL</div>
-    
-    <div style="padding:10px;">
-      COP in window: <b id="window-cop"></b>
-    </div>
+    <div style="clear:both"></div>
   </div>
         
-  <div id="advanced-block" style="background-color:#fff; padding:10px; display:none">
+  <div id="advanced-block" style="background-color:#eee; padding:10px; display:none">
     <div style="color:#000">
       <table class="table">
         <tr>
@@ -101,33 +110,23 @@
     </div>
   </div>
   <br>
-       
-  <div style="background-color:#ccc;">  
-    <div style="padding:10px;">
-      <b>HISTORY</b>
+  
+  <div style="background-color:rgba(68,179,226,1.0); padding:10px;">
+    <b>TIME OF USE</b>
+  </div>
+  <div style="background-color:rgba(68,179,226,0.1); padding:10px; color:#333">
+    <div style="width:400px; text-align:center; float:right; padding-top:100px;">
+        <p><b><span id="prclocal">--</span>%</b> Off-peak power<br><span style="font-size:12px">In the last 7 days</span></p>
+        <img id="star1" src="<?php echo $path; ?>files/star20.png" style="width:45px">
+        <img id="star2" src="<?php echo $path; ?>files/star20.png" style="width:45px">
+        <img id="star3" src="<?php echo $path; ?>files/star20.png" style="width:45px">
+        <img id="star4" src="<?php echo $path; ?>files/star20.png" style="width:45px">
+        <img id="star5" src="<?php echo $path; ?>files/star20.png" style="width:45px">
     </div>
+    
+    <canvas id="piegraph" width=420 height=400 ></canvas>
   </div>
-        
-  <div style="background-color:#fff; padding:10px;">
-    <table style="width:100%; color:#333;">
-    <tr>
-      <td style="width:33.3%; text-align:center" valign="top">
-        Total Electricity in
-        <h1><span id="total_elec"></span> kWh</h1>
-      </td>
-      
-      <td style="width:33.3%; text-align:center" valign="top">
-        Total Heat output
-        <h1><span id="total_heat"></span> kWh</h1>
-      </td>
-      
-      <td style="width:33.3%; text-align:center" valign="top">
-        All-time COP
-        <h1><span id="total_cop"></span></h1>
-      </td>
-    </tr>
-    </table>
-  </div>
+  <br>    
 </div>
   
 <script>
@@ -142,13 +141,12 @@ $("body").css('background-color','WhiteSmoke');
 
 // App config
 var config = {
-    "heatpump_elec":{"type":"feed", "autoname":"heatpump_elec", "engine":5, "optional":true},
-    "heatpump_elec_kwh":{"type":"feed", "autoname":"heatpump_elec_kwh", "engine":5},
-    "heatpump_heat":{"type":"feed", "autoname":"heatpump_heat", "engine":"5"},
-    "heatpump_heat_kwh":{"type":"feed", "autoname":"heatpump_heat_kwh", "engine":5},
-    "heatpump_flowT":{"type":"feed", "autoname":"heatpump_flowT", "engine":5},
-    "heatpump_returnT":{"type":"feed", "autoname":"heatpump_returnT", "engine":5}
+    usename:{"type":"feed", "autoname":"OpenEVSE_POWER", "engine":"5"},
+    "use_kwh":{"type":"feed", "autoname":"OpenEVSE_KWH", "engine":5}
 };
+
+var usename = "OpenEVSE_POWER";
+var kwhname = "OpenEVSE_KWH";
 
 // Get feed list
 var feeds = feed.listbyname();
@@ -165,21 +163,21 @@ var powergraph_series = [];
 var previousPoint = false;
 var viewmode = "bargraph";
 var panning = false;
+var period_text = "month";
+var period_average = 0;
+var comparison_heating = false;
+var comparison_transport = false;
 
-meta["heatpump_elec_kwh"] = feed.getmeta(feeds["heatpump_elec_kwh"].id);
-meta["heatpump_heat_kwh"] = feed.getmeta(feeds["heatpump_heat_kwh"].id);
+meta[kwhname] = feed.getmeta(feeds[kwhname].id);
 
 var start_time = 0;
-if (meta["heatpump_elec_kwh"].start_time>start_time) start_time = meta["heatpump_elec_kwh"].start_time;
-if (meta["heatpump_heat_kwh"].start_time>start_time) start_time = meta["heatpump_heat_kwh"].start_time;
+if (meta[kwhname].start_time>start_time) start_time = meta[kwhname].start_time;
 
-var heatpump_elec_start = feed.getvalue(feeds["heatpump_elec_kwh"].id, start_time*1000)[1];
-var heatpump_heat_start = feed.getvalue(feeds["heatpump_heat_kwh"].id, start_time*1000)[1];
+var use_start = feed.getvalue(feeds[kwhname].id, start_time*1000)[1];
 
 resize();
 
 var end = (new Date()).getTime();
-
 // If this is a new dashboard there will be less than a days data 
 // show power graph directly in this case
 if (((end*0.001)-start_time)<86400*1) {
@@ -199,10 +197,17 @@ if (((end*0.001)-start_time)<86400*1) {
   bargraph_draw();
 }
 
+/*
+var timeWindow = (3600000*24.0*30);
+var end = (new Date()).getTime();
+var start = end - timeWindow;
+bargraph_load(start,end);
+bargraph_draw();
+timeofuse_load();
+*/
 // -------------------------------------------------------------------------------
 // LOOP
 // -------------------------------------------------------------------------------
-var progtime = 0;
 updater();
 setInterval(updater,5000);
 
@@ -210,37 +215,12 @@ function updater()
 {
     feed.listbynameasync(function(result){
         feeds = result;
-        if (feeds["heatpump_elec"]!=undefined) $("#heatpump_elec").html(Math.round(feeds["heatpump_elec"].value));
-        if (feeds["heatpump_heat"]!=undefined) $("#heatpump_heat").html(Math.round(feeds["heatpump_heat"].value));
-        $("#heatpump_flowT").html(feeds["heatpump_flowT"].value.toFixed(1));
+        $("#power_now").html(Math.round(feeds[usename].value));
         
         // Update all-time values
-        var total_elec = feeds["heatpump_elec_kwh"].value - heatpump_elec_start;
-        var total_heat = feeds["heatpump_heat_kwh"].value - heatpump_heat_start;
-        var total_cop = 0;
-        if (total_elec>0) total_cop = total_heat / total_elec;
+        var total_elec = feeds[kwhname].value - use_start;
         
         $("#total_elec").html(Math.round(total_elec));
-        $("#total_heat").html(Math.round(total_heat));
-        $("#total_cop").html(total_cop.toFixed(2));
-        
-        // Updates every 60 seconds
-        if (progtime%60==0) {
-        
-            if (feeds["heatpump_elec"]!=undefined) {
-                var min30 = feeds["heatpump_elec"].time - (60*30);
-                var min60 = feeds["heatpump_elec"].time - (60*60);
-            } else {
-                var min30 = feeds["heatpump_elec_kwh"].time - (60*30);
-                var min60 = feeds["heatpump_elec_kwh"].time - (60*60);
-            }
-            var elec = feeds["heatpump_elec_kwh"].value - feed.getvalue(feeds["heatpump_elec_kwh"].id, min30*1000)[1];
-            var heat = feeds["heatpump_heat_kwh"].value - feed.getvalue(feeds["heatpump_heat_kwh"].id, min30*1000)[1];
-            var COP = 0;
-            if (elec>0) COP = heat / elec;
-            $("#COP_30m").html(COP.toFixed(2));
-        }
-        progtime += 5;
     });
 }
 
@@ -290,19 +270,14 @@ $('#placeholder').bind("plothover", function (event, pos, item) {
             previousPoint = item.datapoint;
 
             $("#tooltip").remove();
-            if (viewmode=="bargraph")
-            {
-                var itemTime = item.datapoint[0];
-                var elec_kwh = data["heatpump_elec_kwhd"][z][1];
-                var heat_kwh = data["heatpump_heat_kwhd"][z][1];
-                var COP = heat_kwh / elec_kwh;
+            var itemTime = item.datapoint[0];
+            var elec_kwh = data["use_kwhd"][z][1];
 
-                var d = new Date(itemTime);
-                var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-                var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-                var date = days[d.getDay()]+", "+months[d.getMonth()]+" "+d.getDate();
-                tooltip(item.pageX, item.pageY, date+"<br>Electric: "+(elec_kwh).toFixed(1)+" kWh<br>Heat: "+(heat_kwh).toFixed(1)+" kWh<br>COP: "+(COP).toFixed(1), "#fff");
-            }
+            var d = new Date(itemTime);
+            var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+            var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+            var date = days[d.getDay()]+", "+months[d.getMonth()]+" "+d.getDate();
+            tooltip(item.pageX, item.pageY, date+"<br>"+(elec_kwh).toFixed(1)+" kWh", "#fff");
         }
     } else $("#tooltip").remove();
 });
@@ -312,7 +287,7 @@ $('#placeholder').bind("plotclick", function (event, pos, item)
 {
     if (item && !panning && viewmode=="bargraph") {
         var z = item.dataIndex;
-        view.start = data["heatpump_elec_kwhd"][z][0];
+        view.start = data["use_kwhd"][z][0];
         view.end = view.start + 86400*1000;
         $(".bargraph-navigation").hide();
         viewmode = "powergraph";
@@ -343,6 +318,9 @@ $('.bargraph-alltime').click(function () {
     var end = (new Date()).getTime();
     bargraph_load(start,end);
     bargraph_draw();
+    period_text = "period";
+    timeofuse_load();
+    energystacks_draw();
 });
 
 $('.bargraph-week').click(function () {
@@ -351,6 +329,9 @@ $('.bargraph-week').click(function () {
     var start = end - timeWindow;
     bargraph_load(start,end);
     bargraph_draw();
+    period_text = "week";
+    timeofuse_load();
+    energystacks_draw();
 });
 
 $('.bargraph-month').click(function () {
@@ -359,6 +340,21 @@ $('.bargraph-month').click(function () {
     var start = end - timeWindow;
     bargraph_load(start,end);
     bargraph_draw();
+    period_text = "month";
+    timeofuse_load();
+    energystacks_draw();
+});
+
+$("#heating").click(function() {
+    comparison_heating = 0;
+    if ($(this)[0].checked) comparison_heating = 1;
+    energystacks_draw();
+});
+
+$("#transport").click(function() {
+    comparison_transport = 0;
+    if ($(this)[0].checked) comparison_transport = 1;
+    energystacks_draw();
 });
 
 // -------------------------------------------------------------------------------
@@ -379,60 +375,14 @@ function powergraph_load()
     var intervalms = interval * 1000;
     start = Math.ceil(start/intervalms)*intervalms;
     end = Math.ceil(end/intervalms)*intervalms;
+
+    data[usename] = feed.getdata(feeds[usename].id,start,end,interval,1,1);
     
     powergraph_series = [];
-
-    data["heatpump_flowT"] = feed.getdata(feeds["heatpump_flowT"].id,start,end,interval,1,1);
-    data["heatpump_returnT"] = feed.getdata(feeds["heatpump_returnT"].id,start,end,interval,1,1);
-
-    if (feeds["heatpump_elec"]!=undefined) {
-        // Where power feed is available
-        data["heatpump_elec"] = feed.getdata(feeds["heatpump_elec"].id,start,end,interval,1,1);
-        data["heatpump_heat"] = feed.getdata(feeds["heatpump_heat"].id,start,end,interval,1,1);
-        powergraph_series.push({label:"Heat", data:data["heatpump_heat"], yaxis:1, color:0, lines:{show:true, fill:0.2, lineWidth:0.5}});
-        powergraph_series.push({label:"Elec", data:data["heatpump_elec"], yaxis:1, color:1, lines:{show:true, fill:0.3, lineWidth:0.5}});
-    } else {
-        // Where no power feed available
-        var npoints = 50;
-        var interval = ((end-start)*0.001) / npoints;
-        interval = view.round_interval(interval);
-        if (interval<120) interval = 120;
-        var intervalms = interval * 1000;
-        start = Math.ceil(start/intervalms)*intervalms;
-        end = Math.ceil(end/intervalms)*intervalms;
-        
-        var tmp = feed.getdata(feeds["heatpump_elec_kwh"].id,start,end,interval,0,0);
-        data["heatpump_elec"] = [];
-        for (var z=1; z<tmp.length; z++) {
-            var time = tmp[z-1][0];
-            var diff = tmp[z][1] - tmp[z-1][1];  // diff in kWh
-            var power = (diff * 3600000) / interval;
-            data["heatpump_elec"].push([time,power]);
-        }
-        
-        var tmp = feed.getdata(feeds["heatpump_heat_kwh"].id,start,end,interval,0,0);
-        data["heatpump_heat"] = [];
-        for (var z=1; z<tmp.length; z++) {
-            var time = tmp[z-1][0];
-            var diff = tmp[z][1] - tmp[z-1][1];
-            var power = (diff * 3600000) / interval;
-            data["heatpump_heat"].push([time,power]);
-        }
-        powergraph_series.push({label:"Heat", data:data["heatpump_heat"], yaxis:1, color:0, bars:{show:true, barWidth: intervalms * 0.8, fill:0.2}});
-        powergraph_series.push({label:"Elec", data:data["heatpump_elec"], yaxis:1, color:1, bars:{show:true, barWidth: intervalms * 0.8, fill:0.3}});
-    }
-    
-    powergraph_series.push({label:"Flow T", data:data["heatpump_flowT"], yaxis:2, color:2});
-    powergraph_series.push({label:"Return T", data:data["heatpump_returnT"], yaxis:2, color:3});
+    powergraph_series.push({data:data[usename], yaxis:1, color:"#44b3e2", lines:{show:true, fill:0.8, lineWidth:0}});
     
     var feedstats = {};
-    feedstats["heatpump_elec"] = stats(data["heatpump_elec"]);
-    feedstats["heatpump_heat"] = stats(data["heatpump_heat"]);
-    feedstats["heatpump_flowT"] = stats(data["heatpump_flowT"]);
-    feedstats["heatpump_returnT"] = stats(data["heatpump_returnT"]);
-    
-    if (feedstats["heatpump_elec"].mean>0) 
-        $("#window-cop").html((feedstats["heatpump_heat"].mean / feedstats["heatpump_elec"].mean).toFixed(1));
+    feedstats[usename] = stats(data[usename]);
     
     var out = "";
     for (var z in feedstats) {
@@ -467,20 +417,16 @@ function bargraph_load(start,end)
     end = Math.ceil(end/intervalms)*intervalms;
     start = Math.floor(start/intervalms)*intervalms;
     
-    var elec_result = feed.getdataDMY(feeds["heatpump_elec_kwh"].id,start,end,"daily");
-    var heat_result = feed.getdataDMY(feeds["heatpump_heat_kwh"].id,start,end,"daily");
+    var elec_result = feed.getdataDMY(feeds[kwhname].id,start,end,"daily");
     
     var elec_data = [];
-    var heat_data = [];
     
     // remove nan values from the end.
     for (var z in elec_result) {
       if (elec_result[z][1]!=null) elec_data.push(elec_result[z]);
-      if (heat_result[z][1]!=null) heat_data.push(heat_result[z]);
     }
     
-    data["heatpump_elec_kwhd"] = [];
-    data["heatpump_heat_kwhd"] = [];
+    data["use_kwhd"] = [];
     
     if (elec_data.length>0) {
         var lastday = elec_data[elec_data.length-1][0];
@@ -491,32 +437,34 @@ function bargraph_load(start,end)
             // last day in kwh data matches start of today from the browser's perspective
             // which means its safe to append today kwh value
             var next = elec_data[elec_data.length-1][0] + (interval*1000);
-            elec_data.push([next,feeds["heatpump_elec_kwh"].value]);
-            heat_data.push([next,feeds["heatpump_heat_kwh"].value]);
+            elec_data.push([next,feeds[kwhname].value]);
         }
  
+        var total_kwh = 0; 
+        var n = 0;
         // Calculate the daily totals by subtracting each day from the day before
         for (var z=1; z<elec_data.length; z++)
         {
             var time = elec_data[z-1][0];
             var elec_kwh = (elec_data[z][1]-elec_data[z-1][1]);
-            var heat_kwh = (heat_data[z][1]-heat_data[z-1][1]);
-            data["heatpump_elec_kwhd"].push([time,elec_kwh]);
-            data["heatpump_heat_kwhd"].push([time,heat_kwh]);
+            data["use_kwhd"].push([time,elec_kwh]);
+            total_kwh += elec_kwh;
+            n++;
         }
+        period_average = total_kwh / n;
     }
 
     bargraph_series = [];
-
+    
     bargraph_series.push({
-        data: data["heatpump_heat_kwhd"], color: 0,
+        data: data["use_kwhd"], color: "#44b3e2",
         bars: { show: true, align: "center", barWidth: 0.75*3600*24*1000, fill: 1.0, lineWidth:0}
     });
     
-    bargraph_series.push({
-        data: data["heatpump_elec_kwhd"], color: 1,
-        bars: { show: true, align: "center", barWidth: 0.75*3600*24*1000, fill: 1.0, lineWidth:0}
-    });
+    var kwh_today = feeds[kwhname].value*1.0;
+    if (data["use_kwhd"].length>0)
+        kwh_today = data["use_kwhd"][data["use_kwhd"].length-1][1];
+    $("#kwh_today").html(kwh_today.toFixed(1));
 }
 
 function bargraph_draw() 
@@ -531,6 +479,40 @@ function bargraph_draw()
     $('#placeholder').append("<div id='bargraph-label' style='position:absolute;left:50px;top:30px;color:#666;font-size:12px'></div>");
 }
 
+function timeofuse_load() 
+{
+  $.ajax({                                      
+      url: path+"household/data?id="+feeds[usename].id,
+      dataType: 'json',                  
+      success: function(result) {
+          console.log("here...");
+          var prc = Math.round(100*((result.overnightkwh + result.middaykwh) / result.totalkwh));
+          $("#prclocal").html(prc);
+          
+          if (prc>20) $("#star1").attr("src",path+"files/star.png");
+          if (prc>40) setTimeout(function() { $("#star2").attr("src",path+"files/star.png"); }, 100);
+          if (prc>60) setTimeout(function() { $("#star3").attr("src",path+"files/star.png"); }, 200);
+          if (prc>80) setTimeout(function() { $("#star4").attr("src",path+"files/star.png"); }, 300);
+          if (prc>90) setTimeout(function() { $("#star5").attr("src",path+"files/star.png"); }, 400);
+          
+          var data = [
+            {name:"AM PEAK", value: result.morningkwh, color:"rgba(68,179,226,0.8)"},
+            {name:"DAYTIME", value: result.middaykwh, color:"rgba(68,179,226,0.6)"},
+            {name:"PM PEAK", value: result.eveningkwh, color:"rgba(68,179,226,0.9)"},
+            {name:"NIGHT", value: result.overnightkwh, color:"rgba(68,179,226,0.4)"},
+            // {name:"HYDRO", value: 2.0, color:"rgba(255,255,255,0.2)"}   
+          ];
+          
+          var options = {
+            "color": "#333",
+            "centertext": "THIS "+period_text.toUpperCase()
+          }; 
+          
+          piegraph("piegraph",data,options);
+      } 
+  });
+}
+
 function resize() {
     var top_offset = 0;
     var placeholder_bound = $('#placeholder_bound');
@@ -540,6 +522,8 @@ function resize() {
     var height = width*0.5;
 
     if (height>width) height = width;
+    
+    console.log(width+" "+height);
 
     placeholder.width(width);
     placeholder_bound.height(height);
