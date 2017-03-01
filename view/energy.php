@@ -1,76 +1,84 @@
-<?php global $path; ?>
-
 <style>
-    .box {
-        width:300px;
-        height:200px;
-        float:left;
-        background-color:rgba(68,179,226,0.1);
-        margin-right:20px;
-        margin-bottom:20px;
-    }
-    
-    .box2 {
-        width:440px;
-        min-height:550px;
-        float:left;
-        background-color:rgba(68,179,226,0.1);
-        margin-right:20px;
-        margin-bottom:20px;
-    }
-    
-    .box3 {
-        width:900px;
-        background-color:rgba(68,179,226,0.1);
-        margin-right:20px;
-        margin-bottom:20px;
-    }
-    
-    .inner {
-        padding:20px;
-        color:#333;
-    }
 
-    .box-title {
-        background-color:rgba(68,179,226,1.0);
-        padding:10px;
-        color:#fff;
-    }
-    
-    .inner2 {
-        padding:20px;
-        color:#333;
-    }
-    
-    .inner3 {
-        padding:20px;
-        color:#333;
-    }
+.box {
+    width:300px;
+    height:200px;
+    float:left;
+    background-color:rgba(68,179,226,0.1);
+    margin-right:20px;
+    margin-bottom:20px;
+}
 
-    .bluebar {
-        padding:5px; 
-        color:#fff; 
-        background-color:rgba(6,153,250,0.6);
-        font-size:14px;
-        font-weight:bold;
-    }
+.box2 {
+    width:440px;
+    min-height:550px;
+    float:left;
+    background-color:rgba(68,179,226,0.1);
+    margin-right:20px;
+    margin-bottom:20px;
+}
+
+.box3 {
+    width:100%;
+    background-color:rgba(68,179,226,0.1);
+    margin-right:20px;
+    margin-bottom:20px;
+}
+
+.inner {
+    padding:20px;
+    color:#333;
+}
+
+.box-title {
+    background-color:rgba(68,179,226,1.0);
+    padding:10px;
+    color:#fff;
+}
+
+.inner2 {
+    padding:20px;
+    color:#333;
+}
+
+.inner3 {
+    padding:20px;
+    color:#333;
+}
+
+.bluebar {
+    padding:5px; 
+    color:#fff; 
+    background-color:rgba(6,153,250,0.6);
+    font-size:14px;
+    font-weight:bold;
+}
+
+.ch1 {
+    font-size:28px;
+    font-weight:bold;
+    color:rgba(6,153,250,1.0);
+}
+
+.ch1u {
+    font-weight:bold;
+    color:rgba(6,153,250,1.0);
+}
     
-    .ch1 {
-        font-size:28px;
-        font-weight:bold;
-        color:rgba(6,153,250,1.0);
+@media (max-width: 450px) {
+.box2 {
+    width:100%;
     }
-    
-    .ch1u {
-        font-weight:bold;
-        color:rgba(6,153,250,1.0);
-    }
+}
+
+@media (min-width: 450px) and (max-width: 960px) {
+
+}
+@media (min-width: 960px) {
+
+}
     
 </style>
-
-<div class="box3">
-    <div class="box-title" style="background-color:#f6cb1d"><b>THIS PAGE IS WORK IN PROGRESS</b></div>
-</div>
 
 <div class="box3">
     <div class="box-title"><b>DIFFERENT USES OF ENERGY IN CONTEXT</b></div>
@@ -83,7 +91,7 @@
 <div class="box3">
     <div class="box-title"><b>ENERGY SCENARIO: ZERO CARBON BRITAIN</b></div>
     <div class="inner3"><img src="files/zcb.png" style="width:210px; margin-left:10px; float:right" />
-        The ZeroCarbonBritain report by the Center for Alternative Technology shows how it is technically possible to achieve a zero carbon energy system in the UK through both new efficient buildings, existing buildings retrofit, electrification of transport, land use changes and powering up with renewable energy combined with storage technologies to balance supply with demand. The following section summarises the main demand and supply side changes proposed in the ZeroCarbonBritain scenario.<br><br>Also added is an outline of costs of making some of the changes in comparison with what we might spend on energy if we made no changes. All of these figures are constantly changing as the costs of renewables and low energy technologies fall and there is always a difficulty in forecasting energy costs into the future. The important thing is not the precise cost but the awareness of magnitude and the opportunity that presents from thinking what might we achieve if we redirect what we would spend otherwise towards the future we want.
+The ZeroCarbonBritain report by the Center for Alternative Technology shows how it is technically possible to achieve a zero carbon energy system in the UK through both new efficient buildings, existing buildings retrofit, electrification of transport, land use changes and powering up with renewable energy combined with storage and biomass based backup technologies to balance supply with demand. The following section summarises the main demand and supply side changes proposed in the ZeroCarbonBritain scenario.<br><br>Also added is an outline of costs of making some of the changes in comparison with what we might spend on energy if we made no changes. All of these figures are constantly changing as the costs of renewable and energy efficiency technologies fall and there is always a difficulty in forecasting energy costs into the future. The important thing is not the precise cost but the awareness of magnitude and the opportunity that presents from thinking what might we achieve if we redirect what we would spend otherwise towards the future we want.<br><br>
     </div>
 </div>
 
@@ -152,9 +160,9 @@ The amount of electricity required to drive 7,900 miles/yr in an electric car. E
 If we simultaneously make our cities and towns more cycle and walking friendly, improve public transport, increase average car occupancy from 1.6 to 2.0 as the ZeroCarbonBritain suggests, reducing car use to 6100 miles per household and switch from flights to electric trains, this could reduce the energy required for personal transport down to 6.8 kWh/d.
 </div></div>
 
-<div class="box2"><div class="box-title"><b>POWER UP:</b> SOLAR PV</div><div class="inner2"><img src="files/solar.jpg" style="width:100%" /><br><br>1 kWp of solar can generate 870 kWh per year in the UK or 2.4 kWh/d<br><br>4 kWp of solar currently costs around £6800 to install in the UK (£1700/kWp). Over 25 years 1 kWp of solar will generate electricity at a cost of 7.8p/kWh.
+<div class="box2"><div class="box-title"><b>POWER UP:</b> SOLAR PV</div><div class="inner2"><img src="files/solar.jpg" style="width:100%" /><br><br>1 kWp of solar can generate 870 kWh per year in the UK or 2.4 kWh/d<br><br>4 kWp of solar currently costs around £6500 to install in the UK (£1625/kWp). Over 25 years 1 kWp of solar will generate electricity at a cost of 7.5p/kWh.
 <br><br>
-Generating 17.7 kWh/d from solar would cost about £12,500 or only <b>18% of our budget.</b>
+Generating 17.7 kWh/d from solar would cost about £12,000 or only <b>19% of our budget.</b>
 <br><br>
 Solar generates about 5x more electricity in June compared to December, whereas demand is higher in winter. With smart charging of electric cars and a small heat store for hot water solar alone in the above case could meet about 50% of demand.
 </div></div>
@@ -174,21 +182,32 @@ To match 100% of the demand with a zero carbon renewable energy supply scenario'
 <br><br>
 <img src="files/matching.png" style="width:100%"><br><br>
 
-With an equall amount of solar and wind capacity and a 20% oversupply its possible to meet up to 85% of demand directly in a household only energy model. In ZeroCarbonBritain excess renewable energy is also used to generate synthetic fuels and a significant portion is exported, this can raise matching levels to 95%. 
+With an equal amount of solar and wind capacity and a 20% oversupply its possible to meet up to 92% of demand directly in a household only energy model. In ZeroCarbonBritain there are additional flexible demands which can raise this matching level even higher.
 <br><br>
-The final 5% can be supplied from a backup source such as renewably produced synthetic methane (Power to Gas) ran through conventional gas power stations.
+The final 5-10% can be supplied from a backup source such as renewably produced synthetic methane ran through conventional gas power stations.
 
 </div></div>
-<script>
 
+<div style="clear:both"></div>
+
+<script>
+    // $(".row").css("padding","0px");
+    // $(".container").css("background-color","0");
     // ------------------------------------------------------
     
     var c = document.getElementById("stack");  
     var ctx = c.getContext("2d");
     
     var height = 400;
-    var maxval = (9+41+41);
-    stack("UK Average",{"Electric":9,"Heating":41,"Transport":41},0,height,maxval);
+    var maxval = 34.8+6.3+1.1+7.2+31.8+1.0+0.5+8.9;
+    stack("UK Average",{
+      "LAC*":8.3,
+      "Heating":41.1,
+      //"Cooking":1.1,
+      "Car":31.8,
+      "Rail & Water":1.5,
+      "Air":8.9
+    },0,height,maxval);
     
     // ------------------------------------------------------
     
@@ -196,9 +215,15 @@ The final 5% can be supplied from a backup source such as renewably produced syn
     var ctx = c.getContext("2d");
     
     var height = 400;
-    var maxval = (9+41+41);
-    stack("UK Average",{"Electric":9,"Heating":41,"Transport":41},0,height,maxval);
-    stack("ZCB",{"Electric":4.5,"Heating":7.1,"Transport":6.1},85,height,maxval);
+    stack("UK Average",{
+      "LAC*":8.3,
+      "Heating":41.1,
+      //"Cooking":1.1,
+      "Car":31.8,
+      "Rail & Water":1.5,
+      "Air":8.9
+    },0,height,maxval);
+    stack("ZCB",{"Electric":4.5,"Heating":7.0,"Car":4.2,"Other":2.6},85,height,maxval);
     //stack([4.5,6.5,6.4],85,height,scale);
     // ------------------------------------------------------
     
@@ -206,9 +231,9 @@ The final 5% can be supplied from a backup source such as renewably produced syn
     var ctx = c.getContext("2d");
     
     var height = 400;
-    var maxval = (11.0+6.8);
-    stack("Gas/Oil",{"Space Heat":11.0,"Water Heat":6.8},0,height,maxval);
-    stack("Heatpump",{"Space Heat":4.4,"Water Heat":2.7},85,height,maxval);
+    var maxval = (11.0+6.3);
+    stack("Gas/Oil",{"Space Heat":11.1,"Water Heat":6.3},0,height,maxval);
+    stack("Heatpump",{"Space Heat":4.4,"Water Heat":2.5},85,height,maxval);
     
     // ------------------------------------------------------
     
@@ -216,8 +241,8 @@ The final 5% can be supplied from a backup source such as renewably produced syn
     var ctx = c.getContext("2d");
     
     // mobile, bthomehub, laptop, washing, 
-    var text = ["Charging a mobile phone","One LED Light on for 24h","Internet router","Laptop","Fridge A+ 180L","Washing machine","Fridge/freezer A+ 210L","8.2 minute electric shower","Cooking","Water Heating","Space heating (fuel input)","40 miles in a petrol car","40 miles in an electric car","Space Heating Passivhaus Retrofit", "Heatpump electric + passivhaus retrofit"]
-    var data = [0.01,0.144,0.192,0.288,0.33,0.5,0.6,1.23,1.4,8.2,33,40,10,5.8,1.95];
+    var text = ["Charging a mobile phone","One LED Light on for 24h","Internet router","22 miles on an electric bike","Laptop","New Fridge","New Washing machine","New Fridge/freezer","Cooking","8.2 minute electric shower","Water Heating","Space heating (fuel input)","22 miles in a 30 MPG (uk average) petrol car","22 miles in a 50 MPG petrol car", "22 miles in an electric car","Space Heating Passivhaus Retrofit", "Heatpump electric + passivhaus retrofit"]
+    var data = [0.01,0.19,0.22,0.26,0.29,0.39,0.54,0.72,1.1,1.23,6.3,34.8,32,19.5,5.5,5.2,1.7];
     
     var width = 450;
     
@@ -256,38 +281,40 @@ The final 5% can be supplied from a backup source such as renewably produced syn
     }
     
 function stack(title,data,xoffset,height,maxval) {
-
+    var s = 4;
     var bottom = 15;
-    var scale = (height-bottom) / maxval;
+    var datalen = 0;
+    for (var z in data) datalen++
+    var scale = (height-bottom-(datalen*s)) / maxval;
     var y = (height-bottom)-1;
     var width = 80;
     ctx.textAlign    = "center";
     for (var z in data) {
         var seg = data[z]*scale;
-        y -= (seg);
+        y -= (seg)+s;
         ctx.strokeStyle = "rgba(6,153,250,1.0)";
         ctx.fillStyle = "rgba(6,153,250,0.4)";
-        ctx.fillRect(1+xoffset,y+4,width,seg-4);
-        ctx.strokeRect(1+xoffset,y+4,width,seg-4);
+        ctx.fillRect(1+xoffset,y+4,width,seg);
+        ctx.strokeRect(1+xoffset,y+4,width,seg);
         ctx.fillStyle = "#fff";
         
-        if ((seg-4)>30) {
+        if (seg>30) {
             // Key
             ctx.font = "normal 12px arial"; 
-            ctx.fillText(z,xoffset+(width/2),y+(seg/2)-1);
+            ctx.fillText(z,xoffset+(width/2),y+(seg/2));
             // Value
             ctx.font = "bold 12px arial"; 
-            ctx.fillText(data[z]+" kWh/d",xoffset+(width/2),y+(seg/2)+13);
+            ctx.fillText(data[z]+" kWh/d",xoffset+(width/2),y+(seg/2)+14);
         
-        } else {
+        } else if (seg>12) {
             // Value
             ctx.font = "bold 12px arial"; 
-            ctx.fillText(data[z]+" kWh/d",xoffset+(width/2),y+(seg/2)+6);
+            ctx.fillText(data[z]+" kWh/d",xoffset+(width/2),y+(seg/2)+8);
         }
     }
     // Title
     ctx.fillStyle = "#333";
     ctx.font = "normal 12px arial"; 
     ctx.fillText(title,xoffset+(width/2),height-2);
-}    
+}
 </script>
