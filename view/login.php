@@ -64,6 +64,7 @@ $(".sidenav").hide();
 $("body").css('background-color','#29abe2');
 $("body").css('color','#fff');
 $(".container").css("margin","0 auto");
+$(".topnav-menu").hide();
 
 if (!session) {
 
