@@ -2,7 +2,7 @@
     global $path, $session;
     $apikey = $session['apikey_read'];
     
-    $js_css_version = 1;
+    $js_css_version = 2;
 ?>
 
 <!DOCTYPE html>
