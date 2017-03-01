@@ -1,6 +1,8 @@
 <?php
     global $path, $session;
     $apikey = $session['apikey_read'];
+    
+    $js_css_version = 1;
 ?>
 
 <!DOCTYPE html>
@@ -25,14 +27,14 @@
   <meta name="theme-color" content="#44b3e2" />
 
   <!-- Load CSS -->
-  <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>theme/style.css" />
-  <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>theme/buttons.css" />
-  <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>theme/table.css" />
-  <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>theme/forms.css" />
+  <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>theme/style.css?ver=<?php echo $js_css_version; ?>" />
+  <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>theme/buttons.css?ver=<?php echo $js_css_version; ?>" />
+  <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>theme/table.css?ver=<?php echo $js_css_version; ?>" />
+  <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>theme/forms.css?ver=<?php echo $js_css_version; ?>" />
 
   <!-- Load javascript -->
   <script type="text/javascript" src="<?php echo $path; ?>lib/jquery-1.11.3.min.js"></script>
-  <script type="text/javascript" src="<?php echo $path; ?>lib/feed.js"></script>
+  <script type="text/javascript" src="<?php echo $path; ?>lib/feed.js?ver=<?php echo $js_css_version; ?>"></script>
 
 </head>
 <!------------------------------------------------------------------------------------------>
@@ -79,7 +81,7 @@
 </body>
 </html>
 
-<script type="text/javascript" src="<?php echo $path; ?>view/appmenu3.js"></script>
+<script type="text/javascript" src="<?php echo $path; ?>view/appmenu3.js?ver=<?php echo $js_css_version; ?>"></script>
 
 <script>
 
