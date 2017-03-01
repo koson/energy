@@ -17,6 +17,10 @@ select {
   border-radius: 6px;
   box-shadow: none;
   box-sizing: border-box; }
+  
+input {
+ -webkit-text-fill-color: #fff;
+}
 /* Removes awkward default styles on some inputs for iOS */
 input[type="email"],
 input[type="number"],

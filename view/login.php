@@ -34,10 +34,10 @@ input[type=password] {
     <p>Create a new <b>emoncms.org</b> account</p>
   </div>
   
-    <input id="username" type="text" placeholder="Username...">
-    <input id="email" type="text" placeholder="Email..." class="register-elements">
-    <input id="password" type="password" placeholder="Password...">
-    <input id="password-confirm" type="password" placeholder="Confirm Password..." class="register-elements">
+    <input id="username" type="text" placeholder="Username..." style="width:250px">
+    <input id="email" type="text" placeholder="Email..." class="register-elements" style="width:250px">
+    <input id="password" type="password" placeholder="Password..." style="width:250px">
+    <input id="password-confirm" type="password" placeholder="Confirm Password..." class="register-elements" style="width:250px">
     
     <div class="login-elements">
       <button id="login" class="btn">Login</button> or <span id="register-open">register</span>
@@ -65,6 +65,7 @@ $("body").css('background-color','#29abe2');
 $("body").css('color','#fff');
 $(".container").css("margin","0 auto");
 $(".topnav-menu").hide();
+$(".topnav-title").css("margin-left","10px");
 
 if (!session) {
 
