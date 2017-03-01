@@ -21,10 +21,6 @@
 
 <script>
 
-$(".sidenav").show();
-$(".container").css("margin",0);
-$(".container").css("margin-left","250px");
-
 var devices = {};
 var selected_configuration = {};
 var path = "<?php echo $path; ?>";

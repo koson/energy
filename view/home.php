@@ -1,6 +1,6 @@
 <br><br><br>
 
-<div id="welcome-block">
+<div id="welcome-block" style="padding-left:20px">
   <h2>Welcome</h2>
   <b>User:</b> <span id="emailout"></span><br><br>
   <b>Apikey:</b> <span id="apikey_write"></span><br>

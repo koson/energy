@@ -10,6 +10,8 @@ Part of the OpenEnergyMonitor project:
 http://openenergymonitor.org
 
 */
+
+//die;
     
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');

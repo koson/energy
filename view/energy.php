@@ -180,10 +180,7 @@ The final 5% can be supplied from a backup source such as renewably produced syn
 
 </div></div>
 <script>
-    // Enable sidebar, set body background
-    $(".sidenav").show();
-    $(".container").css({margin:"0 0 0 250px"});
-    $("body").css('background-color','WhiteSmoke');
+
     // ------------------------------------------------------
     
     var c = document.getElementById("stack");  

@@ -23,21 +23,21 @@
     font-size:52px; 
     color:#44b3e2;
 }
+
+.block-bound {
+  background-color:rgb(68,179,226);
+}
+
 </style>
 
 <div id="config-error"></div>
 
 <div id="dashboard">
-
-  <div style="background-color:rgba(68,179,226,1.0)">
-
+    
+  <div class="block-bound">
     <div class="bluenav cost">Cost</div>
     <div class="bluenav energy">Energy</div>
-    
-    <div style="padding:10px;">
-      <b>MY ELECTRIC</b>
-    </div>
-
+    <div class="block-title">MY ELECTRIC</div>
   </div>
 
   <div style="background-color:#fff; color:#333; padding:10px;">
@@ -57,7 +57,7 @@
   </div>
   <br>
 
-  <div style="background-color:rgba(68,179,226,1.0);">
+  <div class="block-bound">
   
     <div class="bargraph-navigation">
       <div class="bluenav bargraph-other">OTHER</div>
@@ -77,9 +77,7 @@
       <span class="bluenav time" time='24'>D</span>
     </div>
       
-    <div style="padding:10px;">
-      <b>HISTORY</b>
-    </div>
+    <div class="block-title">HISTORY</div>
        
   </div>
   
@@ -111,8 +109,8 @@
   </div>
   <br>
   
-  <div style="background-color:rgba(68,179,226,1.0); padding:10px;">
-    <b>TIME OF USE</b>
+  <div class="block-bound">
+    <div class="block-title">TIME OF USE</div>
   </div>
   <div style="background-color:rgba(68,179,226,0.1); padding:10px; color:#333">
     <div style="width:400px; text-align:center; float:right; padding-top:100px;">
@@ -129,8 +127,8 @@
   <br>
   
   <div style="width:48%">
-    <div style="background-color:rgba(68,179,226,1.0); padding:10px;">
-        <b>COMPARISON</b>
+    <div class="block-bound">
+        <div class="block-title">COMPARISON</div>
     </div>
     
     <div style="background-color:rgba(68,179,226,0.1); padding:20px; color:#333; text-align:center">
@@ -153,11 +151,6 @@
 // Path and apikey
 var path = "<?php print $path; ?>";
 var apikey = "<?php print $apikey; ?>";
-    
-// Enable sidebar, set body background
-$(".sidenav").show();
-$(".container").css({margin:"0 0 0 250px"});
-$("body").css('background-color','WhiteSmoke');
 
 // App config
 var config = {
@@ -184,6 +177,7 @@ var period_text = "month";
 var period_average = 0;
 var comparison_heating = false;
 var comparison_transport = false;
+var flot_font_size = 12;
 
 meta["use_kwh"] = feed.getmeta(feeds["use_kwh"].id);
 
@@ -399,10 +393,28 @@ function powergraph_draw()
 {
     var options = {
         lines: { fill: false },
-        xaxis: { mode: "time", timezone: "browser", min: view.start, max: view.end},
-        yaxes: [{ min: 0 }],
-        grid: {hoverable: true, clickable: true},
-        selection: { mode: "x" }
+        xaxis: { 
+            mode: "time", timezone: "browser", 
+            min: view.start, max: view.end, 
+            font: {size:flot_font_size, color:"#666"},
+            reserveSpace:false
+        },
+        yaxes: [
+            { min: 0,font: {size:flot_font_size, color:"#666"},reserveSpace:false},
+            {font: {size:flot_font_size, color:"#666"},reserveSpace:false}
+        ],
+        grid: {
+            show:true, 
+            color:"#aaa",
+            borderWidth:0,
+            hoverable: true, 
+            clickable: true,
+            // labelMargin:0,
+            // axisMargin:0
+            margin:{top:30}
+        },
+        selection: { mode: "x" },
+        legend:{position:"NW", noColumns:4}
     }
     $.plot($('#placeholder'),powergraph_series,options);
 }
@@ -465,9 +477,27 @@ function bargraph_load(start,end)
 function bargraph_draw() 
 {
     var options = {
-        xaxis: { mode: "time", timezone: "browser"},
-        grid: {hoverable: true, clickable: true},
-        selection: { mode: "x" }
+        xaxis: { 
+            mode: "time", 
+            timezone: "browser", 
+            font: {size:flot_font_size, color:"#666"}, 
+            // labelHeight:-5
+            reserveSpace:false
+        },
+        yaxis: { 
+            font: {size:flot_font_size, color:"#666"}, 
+            // labelWidth:-5
+            reserveSpace:false,
+            min:0
+        },
+        selection: { mode: "x" },
+        grid: {
+            show:true, 
+            color:"#aaa",
+            borderWidth:0,
+            hoverable: true, 
+            clickable: true
+        }
     }
 
     var plot = $.plot($('#placeholder'),bargraph_series,options);
@@ -579,6 +609,9 @@ function stack(ctx,data,xoffset,options) {
     }
 }
 
+// -------------------------------------------------------------------------------
+// RESIZE
+// -------------------------------------------------------------------------------
 function resize() {
     var top_offset = 0;
     var placeholder_bound = $('#placeholder_bound');
@@ -595,5 +628,22 @@ function resize() {
     placeholder_bound.height(height);
     placeholder.height(height-top_offset);
 }
+
+$(window).resize(function(){
+    var window_width = $(this).width();
+
+    flot_font_size = 12;
+    if (window_width<450) flot_font_size = 10;
+
+    resize(); 
+   
+    if (viewmode=="bargraph") {
+        bargraph_draw();
+    } else {
+        powergraph_draw();
+    }
+    
+    
+});
 
 </script>

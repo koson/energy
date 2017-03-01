@@ -60,6 +60,11 @@ input[type=password] {
 var path = "<?php echo $path; ?>";
 var session = JSON.parse('<?php echo json_encode($session); ?>');
 
+$(".sidenav").hide();
+$("body").css('background-color','#29abe2');
+$("body").css('color','#fff');
+$(".container").css("margin","0 auto");
+
 if (!session) {
 
 } else {
@@ -67,6 +72,7 @@ if (!session) {
     $("#welcome-block").show();
     $("#emailout").html(session.email);
     $(".sidenav").show();
+    $(".container").css("margin","0 0 0 250px");
 }
 
 $("#login").click(function() {

@@ -3,6 +3,7 @@ body {
     margin:0;
     padding:0;
     text-align:center;
+    background-color: WhiteSmoke;
 }
 
 .container {
@@ -10,7 +11,8 @@ body {
     height: auto !important;
     height: 100%;
     /* Negative indent footer by it's height */
-    margin: 0 auto -40px;
+    /* margin: 0 auto -40px; */
+    margin: 0 0 0 250px;
     text-align:left;
 }
 
@@ -25,25 +27,6 @@ body {
 
 .description {
     font-size:22px;
-}
-
-@media (max-width: 450px) {
-  .container {
-    /*width: 450px;*/
-    width: 100%;
-  }
-}
-    
-@media (min-width: 450px) and (max-width: 960px) {
-  .container {
-    width: 100%;
-  }
-}
-
-@media (min-width: 960px) {
-  .container {
-    width: 960px;
-  }
 }
 
 .visnavblock {
@@ -130,4 +113,132 @@ body {
 
 .bluenav:hover {
     background-color:rgba(255,255,255,0.2);
+}
+
+.block-bound {
+  color:#fff;
+  background-color: #ccc;
+}
+
+.block-title {
+  font-weight:bold;
+  padding:10px;
+}
+
+/* ---------------------------------------------------------
+ TOPBAR
+----------------------------------------------------------*/
+
+.topnav {
+  display:none;
+  height:42px;
+  background-color: #44b3e2;
+  text-align:left;
+  
+  color:#fff;
+  /*border-bottom: 1px solid #fff;*/
+}
+
+.topnav-menu {
+   cursor:pointer;
+   width:42px;
+   float:left;
+}
+
+.topnavTitle-titleWrapper {
+  padding-top:11px;
+  font-size:16px;
+}
+
+/* ---------------------------------------------------------
+ SIDEBAR
+----------------------------------------------------------*/
+ /* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 250px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 42px;
+    left: 0;
+    background-color: #5abce5; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    color:#fff;
+    text-align:left;
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    border-top:1px solid #219dd1;  
+}
+
+.sidenav_inner {
+    /*box-sizing: border-box;*/
+    padding: 20px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 0px 10px;
+    text-decoration: none;
+
+    color: #fff;
+    display: block;
+    transition: 0.3s
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+/* ---------------------------------------------------------
+ APP
+----------------------------------------------------------*/
+.title1 {
+  font-weight:bold;
+}
+
+.value1 {
+  font-weight:bold;
+  font-size:32px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+.units1 {
+  font-weight:normal;
+  padding-left:4px;
+  display: inline-block;
+  font-size:18px;
+}
+
+/* ---------------------------------------------------------
+ RESPONSIVE
+----------------------------------------------------------*/
+@media (max-width: 450px) {
+  .sidenav { width:0px; }
+  .topnav { display:block; }
+  .container { margin: 0 auto; width: 100%;  }
+  .row { padding:10px; }
+  
+  .title1 { font-size:12px }
+  .value1 { font-size:18px }
+  
+  .bluenav { font-size:12px; padding:8px; min-width:15px; }
+  .block-title { font-size:12px; padding:8px; }
+  .dmy {display:none}
+  .legendLabel { font-size:10px; }
+}
+    
+@media (min-width: 450px) and (max-width: 960px) {
+  .sidenav { width:0px; }
+  .topnav {
+      display:block;
+  }
+  .container { margin: 0 auto; width: 100%;  }
+}
+
+@media (min-width: 960px) {
+  .container { width: 960px; }
+    .topnav {
+      display:block;
+  }
 }

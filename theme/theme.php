@@ -16,26 +16,31 @@
 <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>theme/buttons.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>theme/table.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>theme/forms.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo $path; ?>theme/sidebar.css" />
 <script type="text/javascript" src="<?php echo $path; ?>lib/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="<?php echo $path; ?>lib/feed.js"></script>
 
 <style>
   body {
-    background-color:#29abe2;
-    color:#fff;
+
   }
 
   .topmenu {
     background-color:#29abe2;
   }
+  
+  .topbar {
+    background-color:#44b3e2;
+    height:42px;
+  }
 </style>
 
 <body>
 
-  <div id="mySidenav" class="sidenav" style="display:none">
+
+
+  <div class="sidenav">
     <div class="sidenav_inner">
-      <img src="<?php echo $path; ?>files/emoncms_logo.png" style="width:200px;">
+      <!--<img src="<?php echo $path; ?>files/emoncms_logo.png" style="width:200px;">-->
       <br><br>
       <div id="appmenu"></div>
       <br><br>
@@ -48,6 +53,21 @@
       <a href="<?php echo $path; ?>intro">Introduction</a>
     </div>
   </div>
+  
+  <div class="topnav">
+      <div class="topnav-menu"><img src="<?php echo $path; ?>theme/list-menu-icon.png" style="height:40px; padding:1px;"></div>
+      
+      <div class="topnavTitle-titleWrapper">
+        <span>
+            <strong>&nbsp;Energy</strong>&nbsp;|&nbsp;Emon<strong>CMS</strong>
+        </span>
+      </div>
+      
+      
+  </div>
+  
+  <div style="height:1px; background-color:#7ccaea"></div>
+  
 
   <div class="container">
     <div class="row">
@@ -68,5 +88,9 @@ $(".logout").click(function() {
             window.location = "";
         }
     });
+});
+
+$(".topnav-menu").click(function(){
+    $(".sidenav").css("width","250px");
 });
 </script>
